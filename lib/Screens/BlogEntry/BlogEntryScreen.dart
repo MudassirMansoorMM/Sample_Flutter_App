@@ -34,6 +34,8 @@ class _BlogEntryScreenState extends State<BlogEntryScreen> {
 
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
+
+  /// Initiate Request for Blog Entry
   @override
   void initState() {
     Provider.of<BlogEntryChangeNotifier>(context,listen:false).getSelectedBlogEntry(widget.blogId, context);
@@ -52,7 +54,12 @@ class _BlogEntryScreenState extends State<BlogEntryScreen> {
 
       body: Consumer<BlogEntryChangeNotifier>(
         builder: (key, blogProvider, child ){
-          return !blogProvider.loaded ?  Center(child: CircularProgressIndicator(backgroundColor: Colors.white,),):
+
+
+          return !blogProvider.loaded ?
+
+          /// Progress Indicator Uptill Data is fetched
+          Center(child: CircularProgressIndicator(backgroundColor: Colors.white,),):
 
 
 
@@ -96,12 +103,9 @@ class _BlogEntryScreenState extends State<BlogEntryScreen> {
               SliverList(
 
                 delegate: SliverChildBuilderDelegate(
-
                       (context, index) {
-
-
+                        /// Blog Entry Body Widget
                         return  blogEntryBody(blogProvider);
-
                   },
                   // Builds 1000 ListTiles
                   childCount: 1,

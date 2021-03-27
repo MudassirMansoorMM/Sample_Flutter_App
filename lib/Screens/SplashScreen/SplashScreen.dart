@@ -8,12 +8,9 @@ import 'package:sample_flutter_app/Utilities/StartupUtility.dart';
 
 class SplashScreen extends StatefulWidget{
 
-
-
-
-
   @override
   _SplashScreenState createState() => _SplashScreenState();
+
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -22,13 +19,14 @@ class _SplashScreenState extends State<SplashScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
 
-
+  /// Initiate Function after the Screen is rendered.
+  /// This function will help us identify the existing user details and
+  /// so that the appropriate screen is Pushed to the stack in case no user is
+  /// available.
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => navigateToNextScreen());
-
   }
 
 
@@ -61,6 +59,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   }
 
+
+
   /// Function to determine next screen based upon user login
   void navigateToNextScreen() async{
 
@@ -82,4 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
 
   }
+
+
+
 }

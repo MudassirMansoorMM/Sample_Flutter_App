@@ -29,7 +29,6 @@ class _LoginFormState extends State<LoginForm> {
 
 
 
-
   @override
   Widget build(BuildContext context) {
 
@@ -90,6 +89,7 @@ class _LoginFormState extends State<LoginForm> {
   }
 
 
+  /// Toggle Visibility of the Password as Hidden or Visible
   void togglePasswordVisibility(){
     setState(() {
       _obscureText = !_obscureText;
@@ -97,7 +97,8 @@ class _LoginFormState extends State<LoginForm> {
   }
 
 
-  validatorPassword(String value){
+  /// Validate Password Function
+   String validatorPassword(String value){
 
     if(value.length == 0){
 
@@ -111,6 +112,7 @@ class _LoginFormState extends State<LoginForm> {
 
   }
 
+  /// Validate Email Function
   validatorEmail(String value){
 
     if(value.length == 0){

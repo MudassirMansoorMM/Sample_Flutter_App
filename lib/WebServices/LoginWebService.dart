@@ -29,9 +29,8 @@ class LoginWebService{
 
         _responseLogin = await dioLogin.post(
 
-          "$baseUrl/LoginUser",
+          "$baseUrl/login",
 
-          data: { "username": id, "password": pass},
 
 
           options: Options(
@@ -42,11 +41,6 @@ class LoginWebService{
 
         );
 
-        /// Save Bearer token if request is successful
-        if(_responseLogin.statusCode == 200){
-
-
-        }
 
         ///Return response if statuss is okay
         return {"response": _responseLogin.data, "status": _responseLogin.statusCode};

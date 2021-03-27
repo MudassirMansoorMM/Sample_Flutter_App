@@ -20,12 +20,11 @@ class _BlogListScreenState extends State<BlogListScreen> {
 
 
 
+  /// Initiate call to fetch blog list once we have context
   @override
   void initState() {
     super.initState();
-
     Provider.of<BlogListChangeNotifier>(context,listen:false).fetchBlogs(context);
-
   }
 
   String title = "Latest Blog";
@@ -37,6 +36,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
     return Scaffold(
 
 
+      /// App Bar
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(title,),

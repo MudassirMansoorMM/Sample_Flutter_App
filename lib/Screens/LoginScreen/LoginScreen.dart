@@ -5,6 +5,7 @@ import 'package:sample_flutter_app/Screens/LoginScreen/Components/LoginForm.dart
 import 'package:sample_flutter_app/Utilities/StorageManager.dart';
 import 'package:sample_flutter_app/WebServices/LoginWebService.dart';
 import 'package:sample_flutter_app/Widgets/FlatButtonWidget.dart';
+import 'package:sample_flutter_app/Widgets/Loading.dart';
 
 
 
@@ -52,26 +53,44 @@ class LoginScreen extends StatelessWidget {
   }
 
 
+  /// Initiate Login Request Function
+  /// Initiate Login Request Function
   loginReq(BuildContext context) async {
 
+    String response;
+
+    // Validate Form
     if(_formKey.currentState.validate()){
-      
+
+
+      //Display loading indicator
+      showDialog(context: context, builder: (BuildContext context)=>loading);
+
+      // Login Web Service Request
       Map<String,dynamic> _loginResponse =  await LoginWebService(id: email.text, pass: password.text).sendLoginReq();
 
-      if(_loginResponse["status"] == 200){
+      //Hide loading indicator on response
+      Navigator.of(context).pop();
 
-        /// Save Bearer token into Secure Storage on Successful login and Proceed to next Screen
+      // Check if the user login was Successful
+      if(_loginResponse["status"] == 201){
+
+        // Save Bearer token into Secure Storage on Successful login and Proceed to next Screen
         StorageManager().setSecureString("bearer", _loginResponse["response"]);
 
+        // Navigate to NextScreen
+        Navigator.pushReplacementNamed(context, "/blogListScreen");
+
       }
-      /// Navigate to Error Screen
+      // Show Error Message if the user couldn't login
       else if(_loginResponse["status"] > 300){
 
-
+        /// Show Snackbar with Response Message
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar( content: Text(_loginResponse["response"]),)
+        );
 
       }
-
-      Navigator.pushReplacementNamed(context, "/blogListScreen");
       
     }
     

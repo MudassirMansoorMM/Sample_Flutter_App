@@ -33,6 +33,7 @@ dependencies:
   provider: 4.3.3
   flutter_secure_storage: 3.3.5
   cached_network_image: ^2.4.1
+  flutter_spinkit:
 
 dev_dependencies:
   flutter_test:
